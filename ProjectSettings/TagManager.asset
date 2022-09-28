@@ -17,6 +17,8 @@ TagManager:
   - hidden_trap
   - porta
   - speech
+  - chao_corredor
+  - chao_sala_grande
   layers:
   - Default
   - TransparentFX

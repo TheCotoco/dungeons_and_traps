@@ -27,7 +27,7 @@ public class key_use : MonoBehaviour
             Debug.Log("Usei!");
             Destroy(porta);
             StartCoroutine(waitForIt());
-            SceneManager.LoadScene("completed");
+           // SceneManager.LoadScene("completed");
             return;
         }
 
