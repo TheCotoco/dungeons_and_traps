@@ -12,7 +12,9 @@ public class spell : MonoBehaviour
     {
         Destroy(gameObject, life);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());        
+        GameObject collider = GameObject.Find("collider");
+        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(collider.GetComponent<Collider>(), GetComponent<Collider>());
     }
 
     // Update is called once per frame

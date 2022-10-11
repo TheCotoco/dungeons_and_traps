@@ -9,13 +9,14 @@ public class player_movement : MonoBehaviour
     private Vector3 origPos, targetPos, targetRot;
     public float timeToMove = 0.5f;
     public float speed = 0.01f;
-    private Animation anim;
+    private Animator anim;
     private GameObject player;
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animation>();
         player = GameObject.Find("mago_player");
+        anim = player.GetComponent<Animator>();
+        anim.SetBool("is_walking", false);
     }
 
 
@@ -38,6 +39,7 @@ public class player_movement : MonoBehaviour
     private IEnumerator MovePlayer(Vector3 direction)
     {
         isMoving = true;
+        anim.SetBool("is_walking", true);
         Vector3 targetRot = new Vector3(0.0f, 0.0F, 0.0f);
 
         if (direction == Vector3.forward)
@@ -66,7 +68,7 @@ public class player_movement : MonoBehaviour
             yield return null;
         }
 
-
+        anim.SetBool("is_walking", false);
         isMoving = false;
 
     }

@@ -13,7 +13,7 @@ public class show_on_collision : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player_collider")
         {
             targetObject.SetActive(true);
             Debug.Log("colidiu com player");            

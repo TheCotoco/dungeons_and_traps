@@ -11,15 +11,15 @@ public class bau2 : MonoBehaviour
     void Awake()
     {
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        ps = GameObject.FindGameObjectWithTag("Player").GetComponent<player_stats>();
+
+        ps = GameObject.FindGameObjectWithTag("Player_collider").GetComponent<player_stats>();
 
     }
 
     // Update is called once per frame
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player_collider")
         {
             ps.found_chest_2 = true;
             Destroy(gameObject);

@@ -9,14 +9,14 @@ public class potion_use : MonoBehaviour
 
     public void Awake()
     {
-        ps = GameObject.FindGameObjectWithTag("Player").GetComponent<player_stats>();
+        ps = GameObject.FindGameObjectWithTag("Player_collider").GetComponent<player_stats>();
              
     }
 
     public void Use()
     {
       
-        ps.current_health = ps.current_health + 2;
+        ps.current_health = ps.current_health + 20;
 
         if(ps.current_health > ps.max_health)
         {
