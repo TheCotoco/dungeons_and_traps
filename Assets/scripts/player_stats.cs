@@ -12,12 +12,19 @@ public class player_stats : MonoBehaviour
     public bool found_chest_1 = false;
     public bool found_chest_2 = false;
     public Image health_bar;
+    public GameManager gameManager;
 
-    void OnCollisionEnter(Collision coll)
+    // Start is called before the first frame update
+    void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+        void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.tag == "armadilha")
         {
-            Debug.Log("colidiu com armadilha");
+            gameManager.play_dmg_sound();
             current_health--;  
         }        
       

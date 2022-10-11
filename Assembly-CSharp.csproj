@@ -83,6 +83,9 @@
     <Compile Include="Assets\scripts\player_stats.cs" />
     <Compile Include="Assets\scripts\bola_de_espinhos.cs" />
     <Compile Include="Assets\scripts\camera_sala_grande_script.cs" />
+    <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\scripts\enemy.cs" />
+    <Compile Include="Assets\monster_laugh.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

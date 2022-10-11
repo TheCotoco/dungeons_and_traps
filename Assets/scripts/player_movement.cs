@@ -11,11 +11,19 @@ public class player_movement : MonoBehaviour
     public float speed = 0.01f;
     private Animator anim;
     private GameObject player;
+    public AudioSource thud_1;
+    public AudioSource thud_2;
+
+    public bool play_sound_1;
+    public bool play_sound_2;
+
 
     void Start()
     {
         player = GameObject.Find("mago_player");
         anim = player.GetComponent<Animator>();
+        thud_1 = GetComponent<AudioSource>();
+        thud_2 = GetComponent<AudioSource>();
         anim.SetBool("is_walking", false);
     }
 
@@ -41,6 +49,8 @@ public class player_movement : MonoBehaviour
         isMoving = true;
         anim.SetBool("is_walking", true);
         Vector3 targetRot = new Vector3(0.0f, 0.0F, 0.0f);
+
+
 
         if (direction == Vector3.forward)
             targetRot = new Vector3(0.0f, 270.0f - player.transform.eulerAngles.y, 0.0f);
@@ -68,9 +78,28 @@ public class player_movement : MonoBehaviour
             yield return null;
         }
 
+        play_sound();
         anim.SetBool("is_walking", false);
         isMoving = false;
 
+    }
+
+    private void play_sound()
+    {
+        if(play_sound_1 == true)
+        {
+            thud_1.Play();
+            Debug.Log("sound 1");
+            play_sound_1 = false;
+            return;
+        }
+        if (play_sound_1 == false)
+        {
+            thud_2.Play();
+            Debug.Log("sound 2");
+            play_sound_1 = true;
+            return;
+        }
     }
 
 

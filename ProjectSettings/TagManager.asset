@@ -21,6 +21,7 @@ TagManager:
   - chao_sala_grande
   - bau
   - Player_collider
+  - pote
   layers:
   - Default
   - TransparentFX

@@ -5,12 +5,14 @@ using UnityEngine;
 public class spell : MonoBehaviour
 {
 
-    public float life = 3;
+    public float life = 0.5f;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Awake()
     {
         Destroy(gameObject, life);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject collider = GameObject.Find("collider");
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
@@ -18,16 +20,32 @@ public class spell : MonoBehaviour
     }
 
     // Update is called once per frame
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
-        if(collision.gameObject.tag == "obstaculos")
+        if(other.gameObject.tag == "obstaculos")
         {
-            Destroy(collision.gameObject);            
+
+            gameManager.play_barrel_sound();
+            Destroy(other.gameObject);
+           
+        }
+
+        if (other.gameObject.tag =="pote")
+        {
+            gameManager.play_pot_sound();
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.name == "inimigo")
+        {
+            gameManager.play_enemy_dmg_sound();
+            Destroy(other.gameObject);
         }
 
         Destroy(gameObject);
 
-       
 
     }
+
+   
 }

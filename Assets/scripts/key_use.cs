@@ -9,16 +9,13 @@ public class key_use : MonoBehaviour
     GameObject player;
     GameObject[] portas;
     public GameObject UiObject;
-
-
-
+    public GameManager gameManager;
     public void Use()
-    {
-
-
+    {      
         portas = GameObject.FindGameObjectsWithTag("porta");
         player = GameObject.FindGameObjectWithTag("Player");
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
 
         var nearDistance = 1000000f;
         GameObject nearest = null;
@@ -37,13 +34,17 @@ public class key_use : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("Usei!");
+            gameManager.open_door();
             Destroy(nearest);
             return;
         }
 
         Debug.Log("Não posso usar aqui");
         UiObject.SetActive(true);
+        gameManager.cant_use_iten();
         StartCoroutine(waitForIt());
+        
+
 
     }
 
@@ -52,5 +53,5 @@ public class key_use : MonoBehaviour
         yield return new WaitForSeconds(1);
         UiObject.SetActive(false);
     }
-   
+    
 }

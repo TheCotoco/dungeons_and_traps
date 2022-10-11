@@ -6,13 +6,12 @@ public class bau : MonoBehaviour
 {
    
     player_stats ps;
-
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Awake()
-    {
-
-   
+    {   
         ps = GameObject.FindGameObjectWithTag("Player_collider").GetComponent<player_stats>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
 
@@ -22,6 +21,7 @@ public class bau : MonoBehaviour
         if (collision.gameObject.tag == "Player_collider")
         {
             ps.found_chest_1 = true;
+            gameManager.play_chest_sound();
             Destroy(gameObject);
             Debug.Log(ps.found_chest_1);
             Debug.Log(ps.found_chest_2);
