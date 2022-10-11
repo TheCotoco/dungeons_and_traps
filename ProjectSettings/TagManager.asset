@@ -19,6 +19,8 @@ TagManager:
   - speech
   - chao_corredor
   - chao_sala_grande
+  - bau
+  - Player_collider
   layers:
   - Default
   - TransparentFX

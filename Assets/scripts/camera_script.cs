@@ -9,15 +9,20 @@ public class camera_script : MonoBehaviour
     public Camera cameraSalaGrande;
     public Camera cameraTesouro1;
     public Camera cameraTesouro2;
-    public bool cameraCorredorView = false; 
-    public bool cameraSalaGrandeView = false;
+    public bool cameraCorredorView;
+    public bool cameraSalaGrandeView;
     public bool cameraInicialView = true;
-    public bool cameraTesouro1View= false;
-    public bool cameraTesouro2View = false;
+    public bool cameraTesouro1View;
+    public bool cameraTesouro2View;
 
 
     // Call this function to enable FPS camera,
     // and disable overhead camera.
+    public void Awake()
+    {
+        cameraInicialView = true;
+    }
+
     public void Update()
     {
         if (cameraCorredorView){

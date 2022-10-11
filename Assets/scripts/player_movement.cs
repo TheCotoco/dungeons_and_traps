@@ -6,11 +6,17 @@ public class player_movement : MonoBehaviour
 {
 
     private bool isMoving;
-    private Vector3 origPos, targetPos;
+    private Vector3 origPos, targetPos, targetRot;
     public float timeToMove = 0.5f;
     public float speed = 0.01f;
+    private Animation anim;
+    private GameObject player;
 
-    
+    void Start()
+    {
+        anim = gameObject.GetComponent<Animation>();
+        player = GameObject.Find("mago_player");
+    }
 
 
     void Update()
@@ -32,6 +38,17 @@ public class player_movement : MonoBehaviour
     private IEnumerator MovePlayer(Vector3 direction)
     {
         isMoving = true;
+        Vector3 targetRot = new Vector3(0.0f, 0.0F, 0.0f);
+
+        if (direction == Vector3.forward)
+            targetRot = new Vector3(0.0f, 270.0f - player.transform.eulerAngles.y, 0.0f);
+        if (direction == Vector3.right)
+            targetRot = new Vector3(0.0f, 0.0f - player.transform.eulerAngles.y, 0.0f);
+        if (direction == Vector3.left)
+            targetRot = new Vector3(0.0f, 180.0f - player.transform.eulerAngles.y, 0.0f);
+        if (direction == Vector3.back)
+            targetRot = new Vector3(0.0f, 90.0f - player.transform.eulerAngles.y, 0.0f);
+
 
         float elapsedTime = 0;
 
@@ -40,6 +57,8 @@ public class player_movement : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + direction;
 
+        player.transform.Rotate(targetRot, Space.Self);
+
         while (elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
@@ -47,12 +66,11 @@ public class player_movement : MonoBehaviour
             yield return null;
         }
 
-        transform.position = targetPos;
 
         isMoving = false;
 
     }
 
-  
+
 }
 

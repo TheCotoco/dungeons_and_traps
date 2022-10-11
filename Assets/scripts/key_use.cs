@@ -7,27 +7,37 @@ public class key_use : MonoBehaviour
 {
     // public GameObject effect;
     GameObject player;
-    GameObject porta;
+    GameObject[] portas;
     public GameObject UiObject;
 
 
 
     public void Use()
     {
-        porta = GameObject.FindGameObjectWithTag("porta");
+
+
+        portas = GameObject.FindGameObjectsWithTag("porta");
         player = GameObject.FindGameObjectWithTag("Player");
+        
 
+        var nearDistance = 1000000f;
+        GameObject nearest = null;
 
-        float dist = Vector3.Distance(player.transform.position, porta.transform.position);
-
-        if (dist < 1)
+        foreach (GameObject porta in portas)
         {
-            UiObject.SetActive(false); 
+            float dist = Vector3.Distance(player.transform.position, porta.transform.position);
+            if (dist < nearDistance)
+            {
+                nearest = porta;
+                nearDistance = dist;
+            }
+        }
+
+        if (nearest != null && nearDistance <= 2f)
+        {
             Destroy(gameObject);
             Debug.Log("Usei!");
-            Destroy(porta);
-            StartCoroutine(waitForIt());
-           // SceneManager.LoadScene("completed");
+            Destroy(nearest);
             return;
         }
 

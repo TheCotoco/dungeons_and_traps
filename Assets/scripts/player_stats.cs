@@ -9,6 +9,8 @@ public class player_stats : MonoBehaviour
     public float max_health = 10f;
     public float current_health = 10f;
     public float perception = 10f;
+    public bool found_chest_1 = false;
+    public bool found_chest_2 = false;
     public Image health_bar;
 
     void OnCollisionEnter(Collision coll)
@@ -26,6 +28,11 @@ public class player_stats : MonoBehaviour
         if(current_health <= 0)
         {
             SceneManager.LoadScene("game_over");
+        }
+
+       if (found_chest_1 && found_chest_2)
+        {
+            SceneManager.LoadScene("completed");
         }
     }
   
