@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
+
 
 public class cast_spell : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class cast_spell : MonoBehaviour
     private void Update()
     {
        
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 spell_sound.Play();
                 if (player.transform.eulerAngles.y >= 0.0f && player.transform.eulerAngles.y < 90f)
