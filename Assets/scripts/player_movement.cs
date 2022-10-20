@@ -89,14 +89,14 @@ public class player_movement : MonoBehaviour
         if(play_sound_1 == true)
         {
             thud_1.Play();
-            Debug.Log("sound 1");
+            //Debug.Log("sound 1");
             play_sound_1 = false;
             return;
         }
         if (play_sound_1 == false)
         {
             thud_2.Play();
-            Debug.Log("sound 2");
+            //Debug.Log("sound 2");
             play_sound_1 = true;
             return;
         }
