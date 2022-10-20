@@ -9,19 +9,19 @@ public class plier_use : MonoBehaviour
    GameObject player;
    public GameObject UiObject;
    GameObject[] armadilhas;
-   GameObject itemToDestroy;
+   public GameManager gameManager;
 
-    public void Awake()
+        public void Awake()
     {        
         UiObject.SetActive(false);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void Use()
     {
+        
         armadilhas = GameObject.FindGameObjectsWithTag("armadilha");
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(armadilhas);
-
         var nearDistance = 1000000f;
         GameObject nearest = null;
 
@@ -38,23 +38,22 @@ public class plier_use : MonoBehaviour
         if (nearest != null && nearDistance <= 2f)
         {
             Destroy(gameObject);
-            Debug.Log("Usei!");
+            gameManager.play_trap_disarm_sound();
             Destroy(nearest);
             return;
         }
-
-        Debug.Log("Não posso usar aqui");        
+    
         UiObject.SetActive(true);
-        StartCoroutine(waitForIt());  
-       
+        gameManager.cant_use_iten();
+        StartCoroutine(waitForIt());
+        
+        return;
     }
 
     IEnumerator waitForIt()
-    { 
-       
+    {        
         yield return new WaitForSeconds(1);
         UiObject.SetActive(false);
-
     }
 
 }

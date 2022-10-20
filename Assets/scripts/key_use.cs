@@ -7,33 +7,44 @@ public class key_use : MonoBehaviour
 {
     // public GameObject effect;
     GameObject player;
-    GameObject porta;
+    GameObject[] portas;
     public GameObject UiObject;
-
-
-
+    public GameManager gameManager;
     public void Use()
-    {
-        porta = GameObject.FindGameObjectWithTag("porta");
+    {      
+        portas = GameObject.FindGameObjectsWithTag("porta");
         player = GameObject.FindGameObjectWithTag("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
 
-        float dist = Vector3.Distance(player.transform.position, porta.transform.position);
+        var nearDistance = 1000000f;
+        GameObject nearest = null;
 
-        if (dist < 1)
+        foreach (GameObject porta in portas)
         {
-            UiObject.SetActive(false); 
+            float dist = Vector3.Distance(player.transform.position, porta.transform.position);
+            if (dist < nearDistance)
+            {
+                nearest = porta;
+                nearDistance = dist;
+            }
+        }
+
+        if (nearest != null && nearDistance <= 2f)
+        {
             Destroy(gameObject);
             Debug.Log("Usei!");
-            Destroy(porta);
-            StartCoroutine(waitForIt());
-            SceneManager.LoadScene("completed");
+            gameManager.open_door();
+            Destroy(nearest);
             return;
         }
 
         Debug.Log("Não posso usar aqui");
         UiObject.SetActive(true);
+        gameManager.cant_use_iten();
         StartCoroutine(waitForIt());
+        
+
 
     }
 
@@ -42,5 +53,5 @@ public class key_use : MonoBehaviour
         yield return new WaitForSeconds(1);
         UiObject.SetActive(false);
     }
-   
+    
 }

@@ -16,6 +16,7 @@ public class find_trap : MonoBehaviour
     private void Start()
     {
         UiObject.SetActive(false);
+        script = player.GetComponent<player_stats>();
     }
 
     private void Update()

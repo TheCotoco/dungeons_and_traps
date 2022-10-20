@@ -6,10 +6,12 @@ public class Pickup : MonoBehaviour
 {
     private Inventory inventory;
     public GameObject itemButton;
+    public GameManager gameManager;
 
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,15 @@ public class Pickup : MonoBehaviour
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform.position, inventory.slots[i].transform.rotation, inventory.slots[i].transform);
                     Destroy(gameObject);
+                    
+                    if (this.name.Contains("key"))
+                    {
+                        gameManager.play_key_sound();
+                    }
+                    else
+                    {
+                        gameManager.play_iten_sound();
+                    }
                     break;
                 }
             }
